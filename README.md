@@ -55,7 +55,10 @@ module lives in your computer and add: `LoadModule wsgi_module
 </Directory>
 ```
 
-5. Restart your apache server
+5. add `Include /etc/apache2/other/*.conf ` to your `httpd.conf`. Change
+   the path to wherever your custom application configurations go
+
+6. Restart your apache server
 
 
 ## Start App Locally With Flask
