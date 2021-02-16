@@ -13,9 +13,10 @@ Apache Python Flask
 
 # Configure Local Apache
 
-### Mac
 
-Start: `brew services start httpd`
+### Mac Apache Commands
+
+Start: `sudo apachectl start`
 
 Stop: `sudo apachectl stop`
 
