@@ -16,3 +16,6 @@ restart () {
   sudo apachectl -k restart
 }
 
+active () {
+  . ./venv/bin/activate
+}
