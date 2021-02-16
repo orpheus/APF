@@ -11,10 +11,16 @@ Apache Python Flask
 5. Active Environment: `. venv/bin/activate` (to deactivate, type
    `deactivate`
 
-# Configure Local Apache
+## Configure Local Apache
+??
 
+## Start App Locally With Flask
 
-### Mac Apache Commands
+`export FLASK_ENV=development`
+
+`flask run`
+
+## Mac Apache Commands
 
 Start: `sudo apachectl start`
 
