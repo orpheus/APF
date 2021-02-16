@@ -100,6 +100,6 @@ Start: `sudo apachectl start`
 
 Stop: `sudo apachectl stop`
 
-Config: `open -e /usr/local/etc/httpd/httpd.conf`
+Config: `vi /etc/apache2/httpd.conf`
 
 Restart: `sudo apachectl -k restart`
