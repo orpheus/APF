@@ -80,6 +80,14 @@ module lives in your computer and add: `LoadModule wsgi_module
 
 7. Your app should be running on localhost
 
+## Simply Apache Summary
+
+1. Make sure python, flask, apache, and wsgi are installed
+2. Create an Apache config for your application
+3. Create a `.wsgi` file for your python app
+3. Load the wsgi module in the Apache config
+4. Restart your apache server for changes to take effect
+
 ## Start App Locally With Flask
 
 `export FLASK_ENV=development`
