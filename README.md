@@ -5,7 +5,7 @@ Apache Python Flask
 
 1. Install Apache
 2. Install Python
-3. Install wsgi (via pip)
+3. Install wsgi (via pip) `pip3 install mod_wsgi`
 3. Install Flask (via pip)
 
 4. Create Virtual Environment `python3 -m venv venv`
@@ -14,27 +14,45 @@ Apache Python Flask
 
 ## Configure Local Apache
 
+> Your local apache  config will differ based on os. For mac it's
+`httpd.conf` and for linux it's `apache2.conf`
+
+
 1. Go into your apache config (`httpd.conf`) and update the values as
    described [here](https://medium.com/@crmcmullen/how-to-install-apache-on-macos-10-13-high-sierra-and-10-14-mojave-using-homebrew-3cb6bf6e3cd4)
+
+> This step may not be necessary, but it's the first thing I did. Mainly
+you want to update your User and Group to be your computer's active User
+and Group (the user displayed when you open a terminal. Type `whoami` to
+see what is what.
 
 2. Create an apache config file for your application. See
    [docs](https://flask.palletsprojects.com/en/1.1.x/deploying/mod_wsgi/)
 
+> Copy and paste this to /etc/apache2/other/MyApp.conf
+> Make sure to change the paths (USING ONLY ABSOLUTE PATHS) and the user
+and group to match
+
+> Point the WSGI alias to your app.wsgi file in your project
+
 ```
 <VirtualHost *>
      # Add machine's IP address (use ifconfig command)
-     ServerName 45.132.227.101
+     ServerName localhost
      # Give an alias to to start your website url with
-     WSGIScriptAlias / ~/code/github/orphues/python/APF/app.wsgi
-     <Directory ~/code/github/orphues/python/APF>
+     WSGIDaemonProcess /Users/rchacon/code/github/orpheus/python/APF user=rchacon group=staff threads=5
+     WSGIScriptAlias / /Users/rchacon/code/github/orpheus/python/APF/app.wsgi
+     <Directory /Users/rchacon/code/github/orpheus/python/APF>
      		# set permissions as per apache2.conf file
+        # WSGIProcessGroup APF
+        # WSGIApplicationGroup %{GLOBAL}
         Order deny,allow
-        AllowOverride None
+        # AllowOverride All
         Allow from all
      </Directory>
-     # ErrorLog ${APACHE_LOG_DIR}/error.log
-     # LogLevel warn
-     # CustomLog ${APACHE_LOG_DIR}/access.log combined
+     ErrorLog /tmp/error.log
+     LogLevel warn
+     CustomLog /tmp/access.log combined
 </VirtualHost>
 ```
 
@@ -60,6 +78,7 @@ module lives in your computer and add: `LoadModule wsgi_module
 
 6. Restart your apache server
 
+7. Your app should be running on localhost
 
 ## Start App Locally With Flask
 
